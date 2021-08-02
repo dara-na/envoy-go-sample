@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  api_service_1:
+    build: .
+    ports: 
+        - "9090:8080"
+
+  api_service_2:
+    build: .
+    ports: 
+        - "9091:8080"
+
+  api_service_3:
+    build: .
+    ports: 
+        - "9092:8080"
+  
+  envoy:
+    depends_on: 
+        - api_service_1
+        - api_service_2
+        - api_service_3
+    image: envoyproxy/envoy:v1.19-latest
+    ports:
+      - "6699:6699"
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml
