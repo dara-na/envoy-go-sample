@@ -22,6 +22,7 @@ services:
         - api_service_3
     image: envoyproxy/envoy:v1.19-latest
     ports:
-      - "6699:6699"
+      - "443:443"
     volumes:
       - ./envoy.yaml:/etc/envoy/envoy.yaml
+      - ./certs:/certs
